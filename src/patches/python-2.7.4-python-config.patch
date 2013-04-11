@@ -1,19 +1,20 @@
 --- a/Misc/python-config.in	2013-04-11 02:17:56.693117845 -0400
 +++ b/Misc/python-config.in	2013-04-11 02:23:07.581106785 -0400
-@@ -1,7 +1,15 @@
+@@ -1,7 +1,16 @@
 -#!@EXENAME@
 +#!/usr/bin/env python
  
 -import sys
  import os
 +import os.path
++import subprocess
 +import sys
 +
 +abspath = os.path.abspath(__file__)
 +bindir, filename = os.path.split(abspath)
 +binpython = os.path.join(bindir, filename.split('-')[0])
 +if sys.executable != binpython:
-+    sys.exit(os.system('%s %s' % (binpython, ' '.join(sys.argv))))
++    sys.exit(subprocess.call([binpython] + sys.argv))
 +
  import getopt
  from distutils import sysconfig
